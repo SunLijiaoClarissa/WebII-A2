@@ -1,5 +1,25 @@
 {
   "dependencies": {
+    "express": "^5.1.0",
     "mysql2": "^3.15.1"
-  }
+  },
+  "name": "webii-a2",
+  "version": "1.0.0",
+  "main": "db-details.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SunLijiaoClarissa/WebII-A2.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SunLijiaoClarissa/WebII-A2/issues"
+  },
+  "homepage": "https://github.com/SunLijiaoClarissa/WebII-A2#readme",
+  "description": ""
 }

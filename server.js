@@ -10,7 +10,13 @@ server.use(cors());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({extended:false}));
 
+
+//api
 server.use("/api", appAPI);
+
+//static
+server.use(express.static("client"));
+
 
 
 server.listen(3060);

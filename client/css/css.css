@@ -158,18 +158,33 @@ body {
     color: #8b7355; 
 }
 
+
 .event-meta {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; 
     margin-bottom: 1rem;
     font-size: 0.9rem;
-    color: #7a6f65; 
+    color: #7a6f65;
 }
 
 .event-date, .event-location {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 4px;
+}
+
+.event-date::before {
+    content: "date:";
+    font-weight: bold;
+    color: #8b7355;
+}
+
+.event-location::before {
+    content: "location:";
+    font-weight: bold;
+    color: #8b7355;
 }
 
 .event-description {
@@ -201,9 +216,14 @@ body {
     color: #8b7355;
 }
 
-.status-upcoming {
+.status-coming {
     background-color: #f0e9dc; 
     color: #a9927a;
+}
+
+.status-finish {
+    background-color: #bab8b4; 
+    color: #8c7e6e;
 }
 
 .btn {

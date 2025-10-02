@@ -16,8 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
             activeEvents.forEach(event => {
                 const startDate = new Date(event.start_date);
                 const endDate = new Date(event.end_date);
-                startDate.setHours(0, 0, 0, 0);
-                endDate.setHours(0, 0, 0, 0);
                 
                 // match event status
                 if (endDate < today) {
@@ -87,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const isfinish = type === 'finish';
             const buttonHTML = isfinish ? 
                 `<button disabled>More...</button>` : 
-                `<a href="#" class="btn">${type === 'current' ? 'Participate Now' : 'Learn More'}</a>`;
+                `<a href="description.html?id=${event.id}" class="btn">${type === 'current' ? 'Participate Now' : 'Learn More'}</a>`;
             
             eventsHTML += `
                 <div class="event-card">
@@ -95,11 +93,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3 class="event-title">${event.title}</h3>
                         <div class="event-meta">
                             <div class="event-date">
-                                <i class="far fa-calendar"></i>
                                 ${formattedStartDate} to ${formattedEndDate}
                             </div>
                             <div class="event-location">
-                                <i class="fas fa-map-marker-alt"></i>
                                 ${event.location}
                             </div>
                         </div>

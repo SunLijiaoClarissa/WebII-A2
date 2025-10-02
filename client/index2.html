@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>绿色慈善 - 公益活动平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            background-color: #f8fff8;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: #2e7d32;
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            margin-right: 10px;
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #2e7d32;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            background-color: #e8f5e9;
+            color: #1b5e20;
+        }
+
+        /* Banner封面图 */
+        .banner {
+            background: linear-gradient(135deg, #1b5e20 0%, #4caf50 100%);
+            color: white;
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M20,20 C40,0 60,0 80,20 C100,40 100,60 80,80 C60,100 40,100 20,80 C0,60 0,40 20,20 Z" fill="white"/></svg>');
+            background-size: 200px;
+        }
+
+        .banner-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .banner-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .banner-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .banner-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        /* 活动部分 */
+        .events-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1b5e20;
+            font-size: 2.5rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #4caf50;
+            border-radius: 2px;
+        }
+
+        .events-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #4caf50;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .event-content {
+            padding: 1.5rem;
+        }
+
+        .event-title {
+            font-size: 1.4rem;
+            margin-bottom: 0.8rem;
+            color: #1b5e20;
+        }
+
+        .event-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .event-date, .event-location {
+            display: flex;
+            align-items: center;
+        }
+
+        .event-description {
+            margin-bottom: 1.2rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .event-target {
+            background-color: #e8f5e9;
+            padding: 0.7rem;
+            border-radius: 4px;
+            margin-bottom: 1.2rem;
+            font-size: 0.9rem;
+            border-left: 3px solid #4caf50;
+        }
+
+        .event-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .status-active {
+            background-color: #c8e6c9;
+            color: #2e7d32;
+        }
+
+        .status-upcoming {
+            background-color: #fff9c4;
+            color: #f57f17;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.7rem 1.5rem;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #388e3c;
+        }
+
+        /* 页脚 */
+        footer {
+            background-color: #1b5e20;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .banner-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .banner-title {
+                font-size: 2.5rem;
+            }
+            
+            .events-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">🌱</span>
+                <span>绿色慈善</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="#" class="active">主页</a></li>
+                <li><a href="#">活动</a></li>
+                <li><a href="#">关于我们</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Banner封面图 -->
+    <section class="banner">
+        <div class="banner-content">
+            <h1 class="banner-title">播种希望，收获未来</h1>
+            <p class="banner-subtitle">我们致力于通过教育慈善活动，为需要帮助的儿童和教师提供支持，共同创造更美好的明天</p>
+            
+            <div class="banner-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">慈善项目</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">受益人群</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15</div>
+                    <div class="stat-label">合作地区</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- 活动展示 -->
+    <section class="events-section">
+        <h2 class="section-title">最新公益活动</h2>
+        
+        <div class="events-container" id="events-container">
+            <!-- 活动卡片将通过JavaScript动态生成 -->
+        </div>
+    </section>
+    
+    <!-- 页脚 -->
+    <footer>
+        <div class="footer-content">
+            <p>绿色慈善公益平台 &copy; 2024 版权所有</p>
+        </div>
+    </footer>
+    
+    <script>
+        // 活动数据
+        const eventsData = [
+            {
+                "id": 1,
+                "title": "希望小学奖学金发放仪式",
+                "description": "为山区贫困学生颁发年度奖学金，鼓励他们继续学业，提供学习用品和生活补助。",
+                "date": "2024-09-15T02:00:00.000Z",
+                "location": "云南省丽江市希望小学",
+                "organizer_id": 1,
+                "category_id": 2,
+                "ticket_price": "0.00",
+                "target": "贫困学生、教育工作者",
+                "status": 1
+            },
+            {
+                "id": 2,
+                "title": "乡村教师专业发展培训",
+                "description": "提升乡村教师教学能力的专业培训课程，提供最新教育资源和教学工具。",
+                "date": "2024-10-20T01:00:00.000Z",
+                "location": "四川省凉山州教育中心",
+                "organizer_id": 5,
+                "category_id": 5,
+                "ticket_price": "0.00",
+                "target": "乡村教师、教育志愿者",
+                "status": 1
+            },
+            {
+                "id": 3,
+                "title": "爱心图书角建设活动",
+                "description": "为偏远小学建立图书角，捐赠儿童读物，培养孩子们的阅读兴趣和习惯。",
+                "date": "2024-11-05T06:00:00.000Z",
+                "location": "贵州省黔东南州多所小学",
+                "organizer_id": 2,
+                "category_id": 1,
+                "ticket_price": "0.00",
+                "target": "学龄儿童、图书管理员",
+                "status": 0
+            },
+            {
+                "id": 4,
+                "title": "特殊教育设备捐赠",
+                "description": "向特殊教育学校捐赠康复设备和教学工具，帮助特殊需求儿童获得更好的教育。",
+                "date": "2024-08-30T07:00:00.000Z",
+                "location": "广州市特殊教育学校",
+                "organizer_id": 4,
+                "category_id": 4,
+                "ticket_price": "0.00",
+                "target": "特殊需求儿童、特教老师",
+                "status": 1
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // 过滤掉状态为0的活动
+            const activeEvents = eventsData.filter(event => event.status === 1);
+            
+            // 获取当前日期
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            // 分类活动
+            const currentEvents = [];
+            const upcomingEvents = [];
+            
+            activeEvents.forEach(event => {
+                const eventDate = new Date(event.date);
+                eventDate.setHours(0, 0, 0, 0);
+                
+                if (eventDate >= today) {
+                    if (isToday(eventDate)) {
+                        currentEvents.push(event);
+                    } else {
+                        upcomingEvents.push(event);
+                    }
+                }
+            });
+            
+            // 渲染活动
+            renderEvents([...currentEvents, ...upcomingEvents]);
+            
+            // 渲染活动到页面
+            function renderEvents(events) {
+                const container = document.getElementById('events-container');
+                
+                if (events.length === 0) {
+                    container.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: #666;">
+                            <p>当前没有活动信息。</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                let eventsHTML = '';
+                
+                events.forEach(event => {
+                    const eventDate = new Date(event.date);
+                    const formattedDate = formatDate(eventDate);
+                    
+                    // 判断活动状态
+                    const isTodayEvent = isToday(eventDate);
+                    const statusClass = isTodayEvent ? 'status-active' : 'status-upcoming';
+                    const statusText = isTodayEvent ? '进行中' : '即将开始';
+                    
+                    eventsHTML += `
+                        <div class="event-card">
+                            <div class="event-content">
+                                <h3 class="event-title">${event.title}</h3>
+                                <div class="event-meta">
+                                    <div class="event-date">
+                                        📅 ${formattedDate}
+                                    </div>
+                                    <div class="event-location">
+                                        📍 ${event.location}
+                                    </div>
+                                </div>
+                                <p class="event-description">
+                                    ${event.description}
+                                </p>
+                                <div class="event-target">
+                                    <strong>目标人群:</strong> ${event.target}
+                                </div>
+                                <div class="event-status ${statusClass}">
+                                    ${statusText}
+                                </div>
+                                <a href="#" class="btn">了解更多</a>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                container.innerHTML = eventsHTML;
+            }
+            
+            // 检查日期是否是今天
+            function isToday(date) {
+                const today = new Date();
+                return date.getDate() === today.getDate() &&
+                       date.getMonth() === today.getMonth() &&
+                       date.getFullYear() === today.getFullYear();
+            }
+            
+            // 格式化日期
+            function formatDate(date) {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            }
+        });
+    </script>
+</body>
+</html>

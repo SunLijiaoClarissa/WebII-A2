@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // btn status for event status
             const isfinish = type === 'finish';
             const buttonHTML = isfinish ? 
-                `<button disabled>More...</button>` : 
+                `<a href="description.html?id=${event.id}"> More...</a>` : 
                 `<a href="description.html?id=${event.id}" class="btn">${type === 'current' ? 'Participate Now' : 'Learn More'}</a>`;
             
             eventsHTML += `

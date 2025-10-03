@@ -40,7 +40,7 @@ function renderEventDetails(event) {
 
     container.innerHTML = `
         <div class="event-poster">
-            <span>活动海报</span>
+            <img src="./img/poster.png">
         </div>
         
         <div class="event-details">

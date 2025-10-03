@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Failed to get events data', error);
             document.getElementById('events-container').innerHTML = `
-                    <p>Unable to get events data. </p>
+                <p>Unable to get events data. </p>
             `;
         });
     
@@ -68,7 +68,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (events.length === 0) {
             container.innerHTML = `
-                    <p>There is no event for ${getStatusLabel(type)}.</p>
+                <p>There is no event for ${getStatusLabel(type)}.</p>
             `;
             return;
         }

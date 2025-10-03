@@ -21,11 +21,9 @@ function loadEventDetails(eventId) {
             renderEventDetails(data);
         })
         .catch(error => {
-            console.error('获取活动详情失败:', error);
+            console.error('Failed to get event details:', error);
             document.getElementById('events-description').innerHTML = `
-                <div class="error-message">
-                    <p>无法加载活动详情，请稍后再试。</p>
-                </div>
+                <p>Unable to get events detail.</p>
             `;
         });
 
@@ -83,7 +81,7 @@ function renderEventDetails(event) {
         </div>
     `;
 
-     // status css class
+    // status css class
 
 
     // 格式化日期

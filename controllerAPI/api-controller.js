@@ -26,7 +26,6 @@ router.get("/events/:id", (req, res) => {
         SELECT 
             e.*,
             o.name AS organizer_name,
-            o.description AS organizer_description,
             o.email AS organizer_email,
             c.name AS category_name
         FROM 
@@ -48,4 +47,57 @@ router.get("/events/:id", (req, res) => {
 	});
 
 });
+
+// 极简版搜索API
+router.get("/search", (req, res) => {
+    const { dateFrom, dateTo, location, categoryId } = req.query;
+    
+    let query = `
+        SELECT e.*, o.name AS organizer_name, c.name AS category_name
+        FROM events e
+        LEFT JOIN organizations o ON e.organizer_id = o.id
+        LEFT JOIN categories c ON e.category_id = c.id
+        WHERE e.status = 1
+    `;
+    
+    const params = [];
+    
+    if (dateFrom) {
+        query += ` AND e.start_date >= ?`;
+        params.push(dateFrom);
+    }
+    if (dateTo) {
+        query += ` AND e.end_date <= ?`;
+        params.push(dateTo);
+    }
+    if (location) {
+        query += ` AND e.location LIKE ?`;
+        params.push(`%${location}%`);
+    }
+    if (categoryId) {
+        query += ` AND e.category_id = ?`;
+        params.push(categoryId);
+    }
+    
+    connection.query(query, params, (err, results) => {
+        if (err) {
+            console.error("Search error:", err);
+            return res.status(500).send("Search failed");
+        }
+        res.json(results);
+    });
+});
+
+
+router.get("/categories", (req, res) => {
+	connection.query("SELECT * FROM categories", (err, results) => {
+		if (err) {
+			console.log("Error when retriving the data");
+		}
+		else {
+			res.json(results);
+		}
+	});
+});
+
 module.exports = router;
